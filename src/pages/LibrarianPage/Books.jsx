@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api/books";
-
-const API_URL = "https://librarybackend-1-hdve.onrender.com/api/books";
-
+const API_URL = "http://localhost:5000/api/books";
 
 const Books = () => {
   const [books, setBooks] = useState([]);

@@ -18,13 +18,13 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [booksRes, membersRes, overdueRes] = await Promise.all([
-          axios.get("https://librarybackend-1-hdve.onrender.com/api/books", {
+          axios.get("http://localhost:5000/api/books", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/all", {
+          axios.get("http://localhost:5000/api/borrow/all", {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/overdue", {
+          axios.get("http://localhost:5000/api/borrow/overdue", {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);

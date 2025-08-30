@@ -366,7 +366,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get("https://librarybackend-1-hdve.onrender.com/api/books")
+      .get("http://localhost:5000/api/books")
       .then((res) => setBooks(res.data))
       .catch((err) => console.error(err));
   }, []);

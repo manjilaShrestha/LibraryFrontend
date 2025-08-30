@@ -1,3 +1,12 @@
+// export default function Transactions() {
+//   return (
+//     <div>
+//       <h1>Transactions Page</h1>
+//     </div>
+//   );
+// }
+
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -12,9 +21,9 @@ export default function Members() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         // fetch all borrowed records
-        const resAll = await axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/all", { headers });
+        const resAll = await axios.get("http://localhost:5000/api/borrow/all", { headers });
         // fetch overdue borrowers
-        const resOverdue = await axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/overdue", { headers });
+        const resOverdue = await axios.get("http://localhost:5000/api/borrow/overdue", { headers });
 
         setMembers(resAll.data);
         setOverdueMembers(resOverdue.data.map(m => m._id)); // keep only overdue IDs

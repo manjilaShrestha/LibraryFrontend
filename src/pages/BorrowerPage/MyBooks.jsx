@@ -12,7 +12,7 @@ function MyBooks() {
   useEffect(() => {
     const fetchBorrows = async () => {
       try {
-        const res = await axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/my-borrows", {
+        const res = await axios.get("http://localhost:5000/api/borrow/my-borrows", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBorrows(res.data);
@@ -30,21 +30,23 @@ function MyBooks() {
   const handleReturn = async (borrowId) => {
     try {
       const res = await axios.post(
-        "https://librarybackend-1-hdve.onrender.com/api/borrow/return",
+        "http://localhost:5000/api/borrow/return",
         { borrowId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (res.data.msg === "Book already returned") {
         alert("This book has already been returned.");
+        // remove from frontend anyway
         setBorrows((prev) => prev.filter((b) => b._id !== borrowId));
         return;
       }
 
       if (res.data.success || res.data.msg === "Book returned successfully") {
-      
+        // Animate removal
         setRemoving(borrowId);
 
+        // Wait for animation then remove from state
         setTimeout(() => {
           setBorrows((prev) => prev.filter((b) => b._id !== borrowId));
           setRemoving(null);
@@ -61,6 +63,7 @@ function MyBooks() {
   if (loading) return <p className="p-6">Loading your borrowed books...</p>;
   if (error) return <p className="p-6 text-red-500">{error}</p>;
 
+  // Filter out already returned books
   const activeBorrows = borrows.filter((b) => !b.returnDate);
 
   if (activeBorrows.length === 0) return <p className="p-6">No borrowed books found.</p>;

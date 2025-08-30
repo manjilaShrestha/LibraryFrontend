@@ -11,7 +11,7 @@ export default function Members() {
         const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
         // fetch all borrowed records
-        const resAll = await axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/all", { headers });
+        const resAll = await axios.get("http://localhost:5000/api/borrow/all", { headers });
 
         // extract unique members from borrow records
         const uniqueMembers = {};

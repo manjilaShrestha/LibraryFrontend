@@ -16,7 +16,7 @@ const History = () => {
 
     const fetchHistory = async () => {
       try {
-        const res = await axios.get("https://librarybackend-1-hdve.onrender.com/api/borrow/all", {
+        const res = await axios.get("http://localhost:5000/api/borrow/all", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -32,6 +32,7 @@ const History = () => {
     fetchHistory();
   }, [token]);
 
+  // Filter history by name (case insensitive)
   const filteredHistory = history.filter((h) =>
     h.userId?.name?.toLowerCase().includes(search.toLowerCase())
   );
